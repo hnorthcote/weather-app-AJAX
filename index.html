@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/syle.css">
+    <script defer src="./js/scirpt.js"></script>
+    <title>Quick Weather</title>
 </head>
 <body>
         <h1>Quick Weather</h1>
 
     <div class = "location">
         <label for="city">Please enter the city: </label>
-        <input type="text" id="city" size="10">
+        <input type="text"  id="city" size="10">
         <label for="state"> Please enter the state: </label>
-        <input type="text" id= "state"  size="10"> 
+        <input type="text" name="selectTwo" id= "state"  size="10"> 
         <label for="text"> and/or enter the zip code: </label>
-        <input type="text" id="zip" size="5">
+        <input type="text" name="selectThree"id="zip" size="5">
     </div>
-
-    <select  id="selectType">
-        <option value="">--Please choose an option--</option>
-        <option value="5">5 Day forecast</option>
-        <option value="7">7 day forecast</option>
-        <option value="today">Today's forecast</option>
-
-    </select>
+        <h4>Please choose an option</h4>
+        <form action="">
+            <input type="radio" name="selectOne" value="7"> 7 day forecast<br>
+            <input type="radio" name="selectOne" value="5"> 5 day forecast<br>
+            <input type="radio" name="selectOne" value="today"> Just today's Forecast<br>
+          </form>
     
-
     
 </body>
 </html>
