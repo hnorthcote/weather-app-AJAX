@@ -10,7 +10,7 @@ const $location = $('.location');
 
 //const $checked = $('input[name:"typeSelect"]:checked').val();
 
-
+let $weatherEl = $('#weather');
 
 // Event listeners for search button and capture data into variables
 $location.on('click', "button", handleGetLocation);
@@ -26,65 +26,8 @@ function handleGetLocation(evt) {
     }).then(function(data){
        weather=data;
 
-        console.log(weather);
+        render();
 
-    }, function(error) {
-        console.log(error);
-    });
-    
-}
-/*
-function handleToggleVisibility() {
-    $(this).parent().siblings("p").toggleClass('hidden');
-}
-
-
-
-
-// Create functions to concatenate static info with input
-// create elements to insert the rendered ajax output into DOM
-// Create functions to render the outputs of AJAX to objects
-
-// Constants
-
-const baseUrl = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
-
-// State variables
- 
-let limit, complaints, borough;
-
-
-
-
-
-
-
-//Event listeners
-
-
-
-//Functions
-
-init();
-
-function init() {
-    $yearEl.html(new Date().getFullYear())
-    complaints = [];
-  
-}
-
-function handleGetData(evt) {
-    borough= evt.target.dataset.borough
-    limit = $inputEl.val() || "10";
-
-    $.ajax({
-        url: baseUrl + "?agency=NYPD&$limit="+ limit + "&borough=" + borough
-    }).then(function(data){
-       complaints = data;
-
-       //we want to render the results to the screen
-
-    
     }, function(error) {
         console.log(error);
     });
@@ -93,27 +36,12 @@ function handleGetData(evt) {
 
 
 function render() {
-    const html = generateUI().join("");
-    $complaintListEl.html(html);
+    const weatherDetails = weather.main;
+    
+    weatherState= $.map(weatherDetails, function(index, value){
+            return `<h5>  ${value}  : ${index}</h5>`;
 
+    }
+    )
+    $weatherEl.html(weatherState);
 }
-
-function handleToggleVisibility() {
-    $(this).parent().siblings("p").toggleClass('hidden');
-}
-
-function generateUI () {
-   return complaints.map(function(complaint) {
-        return `
-                    <section class="complaint">
-        <div>
-            <h5>🚨 ${complaint.descriptor}</h5>
-            <button class= "btn btn-small red">What Did The Police Do?</button>
-        </div>
-        <p class="hidden">${complaint.resolution_description}</p>
-    </section>`;
-    })
-}
-
-
-*/
