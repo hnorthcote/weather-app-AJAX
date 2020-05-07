@@ -26,8 +26,6 @@ The screen will refresh with the city in question 3 or 5 day forecast (also coul
 as an extra, the user can expand each day's weather for more details.
 
 
-Wireframes:
-
 /*----- constants -----*/
 Location object
 API url

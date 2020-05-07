@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/syle.css">
-    <script defer src="./js/scirpt.js"></script>
+    <script defer src="./js/script.js"></script>
     <title>Quick Weather</title>
 </head>
 <body>
@@ -15,16 +16,14 @@
         <input type="text"  id="city" size="10">
         <label for="state"> Please enter the state: </label>
         <input type="text" name="selectTwo" id= "state"  size="10"> 
-        <label for="text"> and/or enter the zip code: </label>
-        <input type="text" name="selectThree"id="zip" size="5">
+        <button id="search">Search</button>
     </div>
         <h4>Please choose an option</h4>
-        <form action="">
-            <input type="radio" name="selectOne" value="7"> 7 day forecast<br>
-            <input type="radio" name="selectOne" value="5"> 5 day forecast<br>
-            <input type="radio" name="selectOne" value="today"> Just today's Forecast<br>
-          </form>
-    
-    
+        <form id="type">
+            <input type="radio" name="typeSelect" value="7"> 7 day forecast</button>
+            <input type="radio" name="typeSelect" value="today"> Just today's Forecast</button>
+            <input type="radio" name="typeSelect" value="5"> 5 day forecast</button>
+        </form>
+
 </body>
 </html>
