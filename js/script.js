@@ -1,9 +1,9 @@
 //URL constant for days
 
-const baseUrlDay = "http://api.openweathermap.org/data/2.5/forecast/daily?id={city ID}&cnt={cnt}&appid={your api key}"
+const baseUrlDay = "api.openweathermap.org/data/2.5/forecast/daily?zip=80206,us"
 
 //URL constant for today
-const baseURLToday = "http://api.openweathermap.org/data/2.5/weather?q={city name},{state}&appid={your api key}"
+const baseURLToday = 
 
 // appkey
 
@@ -13,7 +13,7 @@ const apiKey = "5ec02333312079ed68f95a4c09a99088"
 let weather, searchDays, state, city;
 
 // Create main AJAX queries for 1,5and 7 days
-
+const testUrlToday = "http://api.openweathermap.org/data/2.5/weather?q=DENVER,US&APPID=5ec02333312079ed68f95a4c09a99088"
 
 //Rest of url
 const urlDay = `${baseUrlDay}${city}${searchDays}${apiKey}`;
@@ -29,7 +29,7 @@ const $searchType = $('#type');
 
 console.log($searchType);
 
-/*// Event listeners for search button and capture data into variables
+// Event listeners for search button and capture data into variables
 $location.on('click', "button", handleGetLocation);
 
 
