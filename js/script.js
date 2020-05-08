@@ -1,66 +1,56 @@
-//URL constant for days
 
-const baseUrlDay = "http://api.openweathermap.org/data/2.5/forecast/daily?id={city ID}&cnt={cnt}&appid={your api key}"
+let weatherState, searchType, urlChosen, weatherDetails, userInput ;
 
-//URL constant for today
-const baseURLToday = "http://api.openweathermap.org/data/2.5/weather?q={city name},{state}&appid={your api key}"
+// Create main AJAX API URL's
+//const UrlToday = `http://api.openweathermap.org/data/2.5/weather?q=Denver,US&APPID=5ec02333312079ed68f95a4c09a99088`
 
-// appkey
+// URL used for a 7 day search** not in this version**
+//const UrlSevenDay = "https://api.openweathermap.org/data/2.5/onecall?lat=39.74&lon=-104.99&exclude=hourly,current&appid=5ec02333312079ed68f95a4c09a99088"
 
-const apiKey = "5ec02333312079ed68f95a4c09a99088"
-
-// Create variables to capture the inputs and AJAX queries
-let weather, searchDays, state, city;
-
-// Create main AJAX queries for 1,5and 7 days
+const $selectorEl = $('.selector')
+const input = $('input[type="text"]');
 
 
-//Rest of url
-const urlDay = `${baseUrlDay}${city}${searchDays}${apiKey}`;
-const urlToday = `${baseURLToday}${city}${state}${apiKey}`;
 
-//Cached element references
-
-const $city = $('#city');
-const $state = $('#state');
-const $location = $('.location');
-const $searchType = $('#type');
-//const $checked = $('input[name:"typeSelect"]:checked').val();
-
-console.log($searchType);
-
-/*// Event listeners for search button and capture data into variables
-$location.on('click', "button", handleGetLocation);
+let $weatherEl = $('#weather');
 
 
+//***The following code was to select the type of search, will leave this for future versions
+//$('.selector :radio').change(function() {
+    // this will contain a reference to the checkbox   
+//    if (this.checked) {
+//        if(this.value === "7") urlChosen = UrlSevenDay;
+//        else if(this.value === "today") urlChosen = UrlToday;
+//        else console.log("problem on line 18-20");
+//    } else {
+//        // the checkbox is now no longer checked
+//    }
+//    console.log(urlChosen);
+//});
+
+// **This was my first effort to collect the data from the day selector
+//let $selectorEl = $('.selector')
+//let $searchType = $('input[type="radio"]:checked').val();
+//let $selectorEl.on('click', "input", test)
+//function test() { console.log($searchtype)}
+//***********************
+// Event listeners for search button and capture data into variables
+$selectorEl.on('click', "button", handleGetLocation);
 
 // function to capture each input and pass it on to their respective variable
 
 function handleGetLocation(evt) {
-    
-    city = $city.val() || "denver"
-
-    console.log(city);
-    state =$state.val() || "colorado"
-
-    console.log(state);
-
-    searchDays = $searchType.input
-    console.log(searchDays);
-    
-
-}
-
-
-   if(searchDays === "today")
+    event.preventDefault();
+    userInput = input.val();
+    const UrlToday = `http://api.openweathermap.org/data/2.5/weather?q=${userInput},US&APPID=5ec02333312079ed68f95a4c09a99088`
+ console.log("Searching!!");
     $.ajax({
-        url: baseUrl + "?agency=NYPD&$limit="+ limit + "&borough=" + borough
+ //**for second version */       url: urlChosen
+    url: UrlToday
     }).then(function(data){
-       complaints = data;
-
-       //we want to render the results to the screen
-
-       render();
+       weather=data;
+console.log(weather);
+     render();
 
     }, function(error) {
         console.log(error);
@@ -68,81 +58,11 @@ function handleGetLocation(evt) {
     
 }
 
-function handleToggleVisibility() {
-    $(this).parent().siblings("p").toggleClass('hidden');
-}
+function render() {
+    weatherDetails = weather.main;    
+    weatherState= $.map(weatherDetails, function(index, value){
+            return `<h5>  ${value}  : ${index}  </h5>`;
 
-// Create functions to concatenate static info with input
-// create elements to insert the rendered ajax output into DOM
-// Create functions to render the outputs of AJAX to objects
-
-// Constants
-
-const baseUrl = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
-
-// State variables
- 
-let limit, complaints, borough;
-
-
-
-
-
-
-
-//Event listeners
-
-
-
-//Functions
-
-init();
-
-function init() {
-    $yearEl.html(new Date().getFullYear())
-    complaints = [];
-  
-}
-
-function handleGetData(evt) {
-    borough= evt.target.dataset.borough
-    limit = $inputEl.val() || "10";
-
-    $.ajax({
-        url: baseUrl + "?agency=NYPD&$limit="+ limit + "&borough=" + borough
-    }).then(function(data){
-       complaints = data;
-
-       //we want to render the results to the screen
-
-       render();
-
-    }, function(error) {
-        console.log(error);
-    });
-    
-}
-
-function handleToggleVisibility() {
-    $(this).parent().siblings("p").toggleClass('hidden');
-}
-
-function generateUI () {
-   return complaints.map(function(complaint) {
-        return `
-                    <section class="complaint">
-        <div>
-            <h5>🚨 ${complaint.descriptor}</h5>
-            <button class= "btn btn-small red">What Did The Police Do?</button>
-        </div>
-        <p class="hidden">${complaint.resolution_description}</p>
-    </section>`;
     })
+    $weatherEl.html(weatherState);
 }
-
- function render() {
-     const html = generateUI().join("");
-     $complaintListEl.html(html);
-
- }
-*/
